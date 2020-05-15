@@ -25,9 +25,27 @@ echo "Total Number Of Tail Win Is $IsTailWon"
 if [[ IsHeadWon -lt IsTailWon ]]
 then
 	echo "Tail Win"
-elif [[ IsHeadWon -eq IsTailWon ]]
-then
-	echo "Tie"
 else
 	echo "Head Win"
+fi
+
+if [[ IsHeadWon -eq IsTailWon ]]
+then
+while [[ $WinDifference -ge 2 ]]
+do
+	randomCheck=$(( RANDOM%2 ))
+
+if [[ IsHead -eq randomCheck ]]
+then
+	echo "Head"
+	IsHeadWon=$(( $IsHeadWon + 1 ))
+	WinDifference=$(( $IsHeadWon - $IsTailWon ))
+else
+	echo "Tail"
+	IsTailWon=$(( $IsTailWon + 1 ))
+	WinDifference=$(( $IsTailWon - $IsHeadWon ))
+fi
+done
+else
+	echo "Tie"
 fi
